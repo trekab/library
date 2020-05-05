@@ -4,35 +4,36 @@
 	<title>Library</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body>
-  <header class="col-md-12">
-    <h1>Library</h1>
+<body class="container bg-light px-0">
+  <header class="col-md-12 bg-dark text-light py-2 px-4 d-flex align-items-center justify-content-between">
+		<h1>My Library</h1>
+		<button class ="btn btn-primary rounded-pill">Add New</button>
   </header>
 	<section class="row mx-0">
-		<div class="mx-auto">
-			<form class="form-inline">
-			  <div class="form-group">
-			    <label for="author-input">Author</label>
+		<div class="py-4 w-100 border">
+			<form class="form-inline justify-content-center">
+			  <div class="form-group px-2">
+			    <label class="px-1" for="author-input">Author</label>
 			    <input type="email" class="form-control" id="author-input">
 			  </div>
-			  <div class="form-group">
-			    <label for="title">Title</label>
+			  <div class="form-group px-2">
+			    <label class="px-1" for="title">Title</label>
 			    <input type="text" class="form-control" id="title">
 			  </div>
-			  <div class="form-group">
-			    <label for="pages">Pages</label>
+			  <div class="form-group px-2">
+			    <label class="px-1" for="pages">Pages</label>
 			    <input type="number" class="form-control" id="pages">
 			  </div>
-			  <div class="form-group">
-			    <label for="read">Read?</label>
-			    <input type="checkbox" class="form-control" id="read">
+			  <div class="form-group px-2">
+					<input type="checkbox" class="form-control" id="read">
+			    <label class="px-1" for="read">Read?</label>
 			  </div>
-			  <button type="submit" class="btn btn-primary">New</button>
+			  <button type="submit" class="btn btn-primary">Add</button>
 			</form>
 		</div>
 	</section>
 	<section class ="book-section">
-    <h2>Books</h2>
+    <h2 class="text-center py-3">Books</h2>
     <div id="book-list">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
