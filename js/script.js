@@ -1,3 +1,6 @@
+const addBookButton = document.getElementById('addBook');
+let example = document.getElementsByClassName('card')[0];
+let bookList = document.querySelector('.book-list');
 let library = [];
 
 function Book(author, title, pages, read = false, summary) {
@@ -8,10 +11,20 @@ function Book(author, title, pages, read = false, summary) {
   this.summary = summary;
 }
 
-function addBookToLibrary() {
-
+function addBookToLibrary(book) {
+	library.push(book);
 }
 
-book = new Book("author", "book_title",123,true,"This is a very good book" )
+function card(book){
+	
+}
 
-console.log(book);
+addBookButton.addEventListener('click', () => {
+	let bookList = document.querySelector('.book-list');
+	let example = document.createElement('div');
+	example.className = "card col-4"
+	example.innerHTML = document.getElementsByClassName('card')[0].innerHTML
+	bookList.appendChild(example);
+	console.log(example);
+});
+console.log(bookList);

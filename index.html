@@ -7,7 +7,7 @@
 <body class="container bg-light px-0">
   <header class="col-md-12 bg-dark text-light py-2 px-4 d-flex align-items-center justify-content-between">
 		<h1>My Library</h1>
-		<button class ="btn btn-primary rounded-pill">Add New</button>
+		<button class ="btn btn-primary rounded-pill" id="addBook">Add New</button>
   </header>
 	<section class="row mx-0">
 		<div class="py-4 w-100 border">
@@ -34,8 +34,8 @@
 	</section>
 	<section class ="book-section">
     <h2 class="text-center py-3">Books</h2>
-    <div id="book-list">
-      <div class="card" style="width: 18rem;">
+    <div class="book-list row">
+      <div class="card col-4">
         <div class="card-body">
           <h3 class="card-title text-center">Book Title</h3>
           <h5 class="card-title">Author</h5>
@@ -49,6 +49,6 @@
       </div>
     </div>
   </section>
-  <script src="/js/script.js"></script>  
+  <script src="js/script.js"></script>  
 </body>
 </html>
