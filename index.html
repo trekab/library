@@ -5,10 +5,10 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-	<div class="row mx-0">
-		<div class="col-md-12">
-			<h1>Library</h1>
-		</div>
+  <header class="col-md-12">
+    <h1>Library</h1>
+  </header>
+	<section class="row mx-0">
 		<div class="mx-auto">
 			<form class="form-inline">
 			  <div class="form-group">
@@ -30,16 +30,23 @@
 			  <button type="submit" class="btn btn-primary">New</button>
 			</form>
 		</div>
-		
-	</div>
-	<div>
-		<h2>Books</h2>
-		<div>
-			<span>Author</span>
-			<span>Title</span>
-			<span>Pages</span>
-			<span>Read</span>
-		</div>
-	</div>
+	</section>
+	<section class ="book-section">
+    <h2>Books</h2>
+    <div id="book-list">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h3 class="card-title text-center">Book Title</h3>
+          <h5 class="card-title">Author</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex justify-content-between align-items-center pb-3">
+            <span>XXX Pages</span>
+            <span class="btn btn-outline-success rounded-pill py-0"> Read</span>
+          </div>
+          <a href="#" class="w-100 btn btn-primary rounded-pill">Remove</a>
+        </div>
+      </div>
+    </div>
+	</section>
 </body>
 </html>
