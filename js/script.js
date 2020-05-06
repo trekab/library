@@ -15,6 +15,14 @@ function removeBookFromLibrary(bookIndex) {
   library.splice(bookIndex, 1);
 }
 
+function changeReadStatus(bookIndex) {
+  if (library[bookIndex].read) {
+    library[bookIndex].read = false;
+  } else {
+    library[bookIndex].read = true;
+  }
+}
+
 const addNewForm = document.getElementById('new-book-form');
 const bookList = document.querySelector('.book-list');
 const formToggleBtn = document.getElementById('form-toggle-btn');
@@ -39,20 +47,20 @@ function createCard(book, id) {
   const bookTitle = document.createElement('h3');
   const bookAuthor = document.createElement('h5');
   const bookPages = document.createElement('span');
-  const bookReadStatus = document.createElement('span');
+  const bookReadStatus = document.createElement('button');
   const bookRemoveButton = document.createElement('button');
   const bookPageReadSection = document.createElement('div');
 
-  card.className = 'card col-4';
+  card.className = 'card col-4 border-secondary';
   cardBody.className = 'card-body';
   bookTitle.className = 'card-title text-center';
   bookAuthor.className = 'card-title';
   bookRemoveButton.className = `w-100 btn btn-primary rounded-pill remove-button id-${id}`;
   bookPageReadSection.className = 'd-flex justify-content-between align-items-center pb-3';
   if (book.read) {
-    bookReadStatus.className = 'btn btn-outline-secondary disabled rounded-pill py-0';
+    bookReadStatus.className = `btn btn-outline-secondary disabled rounded-pill py-0 id-${id}`;
   } else {
-    bookReadStatus.className = 'btn btn-outline-success rounded-pill py-0';
+    bookReadStatus.className = `btn btn-outline-success rounded-pill py-0 id-${id}`;
   }
   bookTitle.innerHTML = book.title;
   bookAuthor.innerHTML = book.author;
@@ -72,6 +80,14 @@ function createCard(book, id) {
     const bookId = bookRemoveButton.classList.toString().match(/id-[0-9]+/)[0].match(/[0-9]+/)[0];
     removeBookFromLibrary(bookId);
     render(library);
+  });
+  bookReadStatus.addEventListener('click', () => {
+    const bookId = bookReadStatus.classList.toString().match(/id-[0-9]+/)[0].match(/[0-9]+/)[0];
+    changeReadStatus(bookId);
+    bookReadStatus.classList.toggle('disabled');
+    bookReadStatus.classList.toggle('btn-outline-secondary');
+    bookReadStatus.classList.toggle('btn-outline-success');
+    console.log(library);
   });
 
   return card;
