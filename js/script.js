@@ -87,7 +87,6 @@ function createCard(book, id) {
     bookReadStatus.classList.toggle('disabled');
     bookReadStatus.classList.toggle('btn-outline-secondary');
     bookReadStatus.classList.toggle('btn-outline-success');
-    console.log(library);
   });
 
   return card;
