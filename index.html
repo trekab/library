@@ -7,10 +7,10 @@
 <body class="container bg-light px-0">
   <header class="col-md-12 bg-dark text-light py-2 px-4 d-flex align-items-center justify-content-between">
 		<h1>My Library</h1>
-		<button class ="btn btn-primary rounded-pill" id="toggle-form">Add New</button>
+		<button class ="btn btn-primary rounded-pill" id="form-toggle-btn" data-toggle="button" aria-pressed="false" autocomplete="off">New Book</button>
   </header>
 	<section class="row mx-0">
-		<div class="py-4 w-100 border">
+		<div id = "new-book-form-container" class="py-4 w-100 border d-none">
 			<form  id="new-book-form" class="form-inline justify-content-center">
 			  <div class="form-group px-2">
 			    <label class="px-1" for="author-input">Author</label>
@@ -28,7 +28,7 @@
 					<input type="checkbox" class="form-control" id="read">
 			    <label class="px-1" for="read">Read?</label>
 			  </div>
-				<button id = "add-book" class="btn btn-primary">Add</button>
+				<button id = "add-book" class="btn btn-primary rounded-pill">Add Book</button>
 			</form>
 		</div>
 	</section>

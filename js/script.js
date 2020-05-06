@@ -1,6 +1,5 @@
-const addNewForm = document.getElementById('new-book-form');
-const bookList = document.querySelector('.book-list');
 const library = [];
+
 function Book(author, title, pages, read = false) {
   this.author = author;
   this.title = title;
@@ -12,7 +11,29 @@ function addBookToLibrary(book) {
   library.push(book);
 }
 
-function createCard(book) {
+function removeBookFromLibrary(bookIndex) {
+  library.splice(bookIndex, 1);
+}
+
+const addNewForm = document.getElementById('new-book-form');
+const bookList = document.querySelector('.book-list');
+const formToggleBtn = document.getElementById('form-toggle-btn');
+const formContainer = document.getElementById('new-book-form-container');
+
+formToggleBtn.addEventListener('click', () => {
+  formContainer.classList.toggle('d-none');
+});
+
+
+function render(bookArray) {
+  bookList.innerHTML = '';
+  bookArray.forEach((book, index) => {
+    // eslint-disable-next-line no-use-before-define
+    bookList.appendChild(createCard(book, index));
+  });
+}
+
+function createCard(book, id) {
   const card = document.createElement('div');
   const cardBody = document.createElement('div');
   const bookTitle = document.createElement('h3');
@@ -21,11 +42,12 @@ function createCard(book) {
   const bookReadStatus = document.createElement('span');
   const bookRemoveButton = document.createElement('button');
   const bookPageReadSection = document.createElement('div');
+
   card.className = 'card col-4';
   cardBody.className = 'card-body';
   bookTitle.className = 'card-title text-center';
   bookAuthor.className = 'card-title';
-  bookRemoveButton.className = 'w-100 btn btn-primary rounded-pill';
+  bookRemoveButton.className = `w-100 btn btn-primary rounded-pill remove-button id-${id}`;
   bookPageReadSection.className = 'd-flex justify-content-between align-items-center pb-3';
   if (book.read) {
     bookReadStatus.className = 'btn btn-outline-secondary disabled rounded-pill py-0';
@@ -45,15 +67,16 @@ function createCard(book) {
   cardBody.appendChild(bookPageReadSection);
   cardBody.appendChild(bookRemoveButton);
   card.appendChild(cardBody);
+
+  bookRemoveButton.addEventListener('click', () => {
+    const bookId = bookRemoveButton.classList.toString().match(/id-[0-9]+/)[0].match(/[0-9]+/)[0];
+    removeBookFromLibrary(bookId);
+    render(library);
+  });
+
   return card;
 }
 
-function displayBooks(bookArray) {
-  bookList.innerHTML = "";
-  bookArray.forEach(book => {
-    bookList.appendChild(createCard(book));
-  });
-}
 
 addNewForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -67,5 +90,5 @@ addNewForm.addEventListener('submit', (e) => {
   document.getElementById('pages').value = '';
   document.getElementById('title').value = '';
   document.getElementById('author-input').value = '';
-  displayBooks(library);
+  render(library);
 });
