@@ -49,6 +49,7 @@ function createCard(book) {
 }
 
 function displayBooks(bookArray) {
+  bookList.innerHTML = "";
   bookArray.forEach(book => {
     bookList.appendChild(createCard(book));
   });
