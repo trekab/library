@@ -1,21 +1,10 @@
-
-function changeReadStatus(bookIndex) {
-  if (library[bookIndex].read) {
-    library[bookIndex].read = false;
-  } else {
-    library[bookIndex].read = true;
-  }
-}
+// eslint-disable-next-line import/extensions
+import * as logic from './logic.js';
 
 const addNewForm = document.getElementById('new-book-form');
 const bookList = document.querySelector('.book-list');
 const formToggleBtn = document.getElementById('form-toggle-btn');
 const formContainer = document.getElementById('new-book-form-container');
-
-formToggleBtn.addEventListener('click', () => {
-  formContainer.classList.toggle('d-none');
-});
-
 
 function render(bookArray) {
   bookList.innerHTML = '';
@@ -24,6 +13,29 @@ function render(bookArray) {
     bookList.appendChild(createCard(book, index));
   });
 }
+
+function clearForm() {
+  document.getElementById('read').checked = false;
+  document.getElementById('pages').value = '';
+  document.getElementById('title').value = '';
+  document.getElementById('author-input').value = '';
+}
+
+addNewForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const author = document.getElementById('author-input').value;
+  const title = document.getElementById('title').value;
+  const pages = document.getElementById('pages').value;
+  const read = document.getElementById('read').checked;
+
+  logic.addBookToLibrary(logic.newBook(author, title, pages, read));
+  clearForm();
+  render(logic.library);
+});
+
+formToggleBtn.addEventListener('click', () => {
+  formContainer.classList.toggle('d-none');
+});
 
 function createCard(book, id) {
   const card = document.createElement('div');
@@ -46,6 +58,7 @@ function createCard(book, id) {
   } else {
     bookReadStatus.className = `btn btn-outline-success rounded-pill py-0 id-${id}`;
   }
+
   bookTitle.innerHTML = book.title;
   bookAuthor.innerHTML = book.author;
   bookPages.innerHTML = `${book.pages} pages.`;
@@ -62,12 +75,13 @@ function createCard(book, id) {
 
   bookRemoveButton.addEventListener('click', () => {
     const bookId = bookRemoveButton.classList.toString().match(/id-[0-9]+/)[0].match(/[0-9]+/)[0];
-    removeBookFromLibrary(bookId);
-    render(library);
+    logic.removeBookFromLibrary(bookId);
+    render(logic.library);
   });
+
   bookReadStatus.addEventListener('click', () => {
     const bookId = bookReadStatus.classList.toString().match(/id-[0-9]+/)[0].match(/[0-9]+/)[0];
-    changeReadStatus(bookId);
+    logic.changeReadStatus(bookId);
     bookReadStatus.classList.toggle('disabled');
     bookReadStatus.classList.toggle('btn-outline-secondary');
     bookReadStatus.classList.toggle('btn-outline-success');
@@ -75,19 +89,3 @@ function createCard(book, id) {
 
   return card;
 }
-
-
-addNewForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const author = document.getElementById('author-input').value;
-  const title = document.getElementById('title').value;
-  const pages = document.getElementById('pages').value;
-  const read = document.getElementById('read').checked;
-  const newBook = new Book(author, title, pages, read);
-  addBookToLibrary(newBook);
-  document.getElementById('read').checked = false;
-  document.getElementById('pages').value = '';
-  document.getElementById('title').value = '';
-  document.getElementById('author-input').value = '';
-  render(library);
-});
